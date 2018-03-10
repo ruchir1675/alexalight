@@ -43,13 +43,8 @@ void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
             
         case WStype_TEXT:
             Serial.println("Got data");
-            //Serial.println("looping...");
-            
-            
-            
-            
+            //Serial.println("looping...")  
             processWebScoketRequest((char*)payload);
-
             break;
             
         case WStype_BIN:
@@ -57,7 +52,7 @@ void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
             hexdump(payload, length);
             Serial.print("Got bin");
             // send data to server
-            // webSocket.sendBIN(payload, length);
+            webSocket.sendBIN(payload, length);
             break;
     }
 
@@ -216,6 +211,7 @@ void processWebScoketRequest(String data){
             Serial.println(jsonResponse);
                   // send message to server
                   webSocket.sendTXT(jsonResponse);
+                  if(query == "cmd" || query == "?"){webSocket.sendTXT(jsonResponse);}
 }
 
 
