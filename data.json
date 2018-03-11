@@ -1,1 +1,1 @@
-"{\"object\": \"switch\", \"value\": \"on\", \"query\": \"cmd\"}"
+"{\"object\": \"switch\", \"state\": \"on\", \"query\": \"cmd\"}"
