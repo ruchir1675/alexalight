@@ -120,10 +120,10 @@ void processWebScoketRequest(String data){
 
             if(query == "?"){ //if command then execute
               Serial.println("Recieved query!");
-                 if(currState=="open"){
-                      message = "On";
+               if(currState=="switch"){
+                      message = "{\"state\":\"ON\"}";
                     }else{
-                      message = "Off";
+                      message = "{\"state\":\"OFF\"}";
                     }
                    jsonResponse.replace("<text>", "Bed room light " + instance + " is " + message );
                    webSocket.sendTXT(jsonResponse);
@@ -133,11 +133,13 @@ void processWebScoketRequest(String data){
             if(instance == "bed"){
                     if(state == "on"){
                             digitalWrite(relayPin1, HIGH);
-                            message = "turning   on";
+                            message = "{\"state\":\"ON\"}";
+                            currState = "ON";
                             Serial.println(instance);
                           }else if(state == "off"){
-                            message = "turning   off";
                             digitalWrite(relayPin1, LOW);
+                            message = "{\"state\":\"OFF\"}";
+                            currState = "OFF";
                             Serial.println(instance);
                         }
                         
@@ -146,11 +148,13 @@ void processWebScoketRequest(String data){
             if(instance == "hall"){
               if(state == "on"){
                             digitalWrite(relayPin2, HIGH);
-                            message = "turning   on";
+                            message = "{\"state\":\"ON\"}";
+                            currState = "ON";
                             Serial.println(instance);
                           }else if(state == "off"){
-                            message = "turning   off";
                             digitalWrite(relayPin2, LOW);
+                            message = "{\"state\":\"OFF\"}";
+                            currState = "OFF";
                             Serial.println(instance);
                         }
             }
@@ -158,11 +162,13 @@ void processWebScoketRequest(String data){
             if(instance == "kitchen"){
               if(state == "on"){
                             digitalWrite(relayPin3, HIGH);
-                            message = "turning   on";
+                            message = "{\"state\":\"ON\"}";
+                            currState = "ON";
                             Serial.println(instance);
                           }else if(state == "off"){
-                            message = "turning   off";
                             digitalWrite(relayPin3, LOW);
+                            message = "{\"state\":\"OFF\"}";
+                            currState = "OFF";
                             Serial.println(instance);
                         }
             }
@@ -170,11 +176,13 @@ void processWebScoketRequest(String data){
             if(instance == "bath"){
               if(state == "on"){
                             digitalWrite(relayPin4, HIGH);
-                            message = "turning   on";
+                            message = "{\"state\":\"ON\"}";
+                            currState = "ON";
                             Serial.println(instance);
                           }else if(state == "off"){
-                            message = "turning   off";
                             digitalWrite(relayPin4, LOW);
+                            message = "{\"state\":\"OFF\"}";
+                            currState = "OFF";
                             Serial.println(instance);
                         }
             }
@@ -184,15 +192,16 @@ void processWebScoketRequest(String data){
                             digitalWrite(relayPin2, HIGH);
                             digitalWrite(relayPin3, HIGH);
                             digitalWrite(relayPin4, HIGH);
-                            message = "turning   on";
+                            message = "{\"state\":\"ON\"}";
+                            currState = "ON";
                             Serial.println(instance);
                           }else if(state == "off"){
-                            message = "turning   off";
                             digitalWrite(relayPin4, LOW);
                             digitalWrite(relayPin4, LOW);
                             digitalWrite(relayPin4, LOW); 
                             digitalWrite(relayPin4, LOW);
-                              
+                            message = "{\"state\":\"OFF\"}";
+                            currState = "OFF"; 
                             Serial.println(instance);
                         }
             }
